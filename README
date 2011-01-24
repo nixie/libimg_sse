@@ -1,0 +1,13 @@
+libimg_sse
+==========
+Purpose of this is to speed up image operations on SSE friendly procesors.
+Friend of mine asked me to write accelerated fitness function to be run on
+SSE to speed up his image evolution algorithm. And I decided to make this
+code public.
+
+usage
+=====
+You can "make" .so or .o version of this library. Dont forget to include
+#include "libimg_sse" to you code.
+Also, you can "make" 32 or 64 bit version of it, please, consult the Makefile.
+
