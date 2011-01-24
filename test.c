@@ -1,7 +1,7 @@
 /* File:      test.c
    Date:      23.01.2011 23:08
    Author:    xferra00
-   Project:   libimgdiff
+   Project:   libimg_sse
    Description:
 
    Copyright (C) 2002 Radek Fer
@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
-#include "libimgdiff.h"
+#include "libimg_sse.h"
 
 #define HEIGHT  512
 #define WIDTH   512

@@ -1,7 +1,7 @@
-/* File:      libimgdiff.h
+/* File:      libimg_sse.h
    Date:      23.01.2011 23:11
    Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-   Project:   libimgdiff
+   Project:   libimg_sse
    Description: Useful quick (SSE accelerated) functions for image processing
 
    Copyright (C) 2002 Radek Fer
@@ -21,8 +21,8 @@
    the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
    02139, USA.
 */
-#ifndef __LIBIMGDIFF_H__
-#define __LIBIMGDIFF_H__
+#ifndef __LIBIMG_SSE_H__
+#define __LIBIMG_SSE_H__
 
 /* compute sum of absolute differences for corresponding bytes in 2 arrays
  * given by pointers $img1 and $img2, both with same lenght $lenght

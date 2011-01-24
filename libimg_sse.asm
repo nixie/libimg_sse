@@ -1,7 +1,7 @@
-;  File:      libbgradiff.asm
+;  File:      libimg_sse.asm
 ;  Date:      23.01.2011
 ;  Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-;  Project:   libimgdiff
+;  Project:   libimg_sse
 ;  Description: Useful quick (SSE accelerated) functions for image processing
 ;
 ;  Copyright (C) 2002 Radek Fer

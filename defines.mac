@@ -1,7 +1,7 @@
 ;  File:      defines.mac
 ;  Date:      23.01.2011
 ;  Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-;  Project:   libimgdiff
+;  Project:   libimg_sse
 ;  Description: ASM macros for use in library
 ;
 ;  Copyright (C) 2002 Radek Fer

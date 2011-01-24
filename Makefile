@@ -1,7 +1,7 @@
 #  File:      Makefile
 #  Date:      23.01.2011
 #  Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-#  Project:   libimgdiff
+#  Project:   libimg_sse
 #  Description:
 #
 #  Copyright (C) 2002 Radek Fer
@@ -20,16 +20,16 @@
 #  in a file called COPYING along with this program; if not, write to
 #  the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
 #  02139, USA.
-LIB_NAME=libimgdiff
+LIB_NAME=libimg_sse
 AS=yasm
 ASFLAGS32= -gdwarf2 -felf32
 ASFLAGS64= -gdwarf2 -felf64
 CFLAGS= -gdwarf-2
 
-$(LIB_NAME)32.o: libimgdiff.asm libimgdiff.h
+$(LIB_NAME)32.o: $(LIB_NAME).asm $(LIB_NAME).h
 	$(AS) $(ASFLAGS32) $< -o $@
 
-$(LIB_NAME)64.o: libimgdiff.asm libimgdiff.h
+$(LIB_NAME)64.o: $(LIB_NAME).asm $(LIB_NAME).h
 	$(AS) $(ASFLAGS64) $< -o $@
 
 $(LIB_NAME)32.so:	$(LIB_NAME)32.o
