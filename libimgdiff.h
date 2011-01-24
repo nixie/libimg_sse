@@ -1,5 +1,5 @@
-/*
-   Date:     23.01.2011 23:11
+/* File:      libimgdiff.h
+   Date:      23.01.2011 23:11
    Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
    Project:   libimgdiff
    Description: Useful quick (SSE accelerated) functions for image processing

@@ -1,10 +1,10 @@
-/*
-   File:      test.c
+/* File:      test.c
    Date:      23.01.2011 23:08
    Author:    xferra00
-   Project:   
+   Project:   libimgdiff
+   Description:
 
-   Copyright (C) 2002 xferra00
+   Copyright (C) 2002 Radek Fer
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -21,7 +21,6 @@
    the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
    02139, USA.
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
