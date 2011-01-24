@@ -33,8 +33,6 @@
 
 #define rdtsc() ({ uint64_t x; asm volatile("rdtsc" : "=A" (x)); x; })
 
-unsigned int absdiff(unsigned char *img1, unsigned char *img2,
-                       unsigned int length);
 unsigned int absdiff_C(unsigned char *img1, unsigned char *img2,
                        unsigned int length);
 

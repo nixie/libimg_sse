@@ -27,8 +27,22 @@
 /* compute sum of absolute differences for corresponding bytes in 2 arrays
  * given by pointers $img1 and $img2, both with same lenght $lenght
  */
-unsigned int absdiff(unsigned char *img1, unsigned char *img2,
-                 unsigned int length)__attribute((cdecl));
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __i386__
+unsigned int absdiff(const unsigned char *img1,
+          const unsigned char *img2, unsigned int length)__attribute((cdecl));
+#else
+unsigned int absdiff(const unsigned char *img1,
+          const unsigned char *img2, unsigned int length);
+#endif
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 
