@@ -1,10 +1,10 @@
 /*
    Date:     23.01.2011 23:11
    Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-   Project:   libbgradiff
-   Description: TODO
+   Project:   libimgdiff
+   Description: Useful quick (SSE accelerated) functions for image processing
 
-   Copyright (C) 2002 xferra00
+   Copyright (C) 2002 Radek Fer
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -21,9 +21,12 @@
    the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
    02139, USA.
 */
-#ifndef __TEST_H__
-#define __TEST_H__
+#ifndef __LIBIMGDIFF_H__
+#define __LIBIMGDIFF_H__
 
+/* compute sum of absolute differences for corresponding bytes in 2 arrays
+ * given by pointers $img1 and $img2, both with same lenght $lenght
+ */
 unsigned int fitness(unsigned char *img1, unsigned char *img2,
                  unsigned int length)__attribute((cdecl));
 

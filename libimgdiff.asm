@@ -1,10 +1,10 @@
 ;  File:      libbgradiff.asm
 ;  Date:      23.01.2011
 ;  Author:    <Radek Fer> xferra00@stud.fit.vutbr.cz
-;  Project:   libbgradiff
-;  Description: TODO
+;  Project:   libimgdiff
+;  Description: Useful quick (SSE accelerated) functions for image processing
 ;
-;  Copyright (C) 2002 xferra00
+;  Copyright (C) 2002 Radek Fer
 ;
 ;  This program is free software; you can redistribute it and/or
 ;  modify it under the terms of the GNU General Public License as
@@ -25,20 +25,12 @@
 [section .text]
   global fitness
 
-; =============================================================================
-; double fitness( uint_8 *img1, uint_8 *img2, uint_32 length );
-; >> img1: ebp+8 | img2: ebp+12 | len: ebp+16
-; =============================================================================
-; remaining = length mod 16
-; ptr = length - remaining - 16
-; while ptr != 0:
-;   xmm0 = img1[ptr]
-;   xmm1 = img2[ptr]
-;   eax += diffsum(xmm0,xmm1)
-;   ptr -= 16
-; do_rest:
 
 %ifidn __OUTPUT_FORMAT__, elf32
+;=============================================================================
+; unsigned int fitness( uint_8 *img1, uint_8 *img2, unsigned int length );
+; >> img1: ebp+8 | img2: ebp+12 | len: ebp+16
+; =============================================================================
 fitness:
   push ebp
   mov ebp, esp
@@ -67,19 +59,21 @@ main_loop32:
 
   movd edx, xmm0
   add eax, edx
-
-  loop main_loop32
+loop main_loop32
 
   ; do rest - TODO
 
 
-  ; return eax
   restore_regs
   mov esp, ebp
   pop ebp
   ret
 
 %elifidn __OUTPUT_FORMAT__, elf64
+;=============================================================================
+; unsigned int fitness( uint_8 *img1, uint_8 *img2, unsigned int length );
+; >> img1: rdi | img2: rsi | len: rdx
+; =============================================================================
 fitness:
   mov rcx, rdx   ; move to "ecx" 3. parameter
   and ecx, 0xFFFFFFF0     ; ecx div 16 - ptr
@@ -101,8 +95,7 @@ main_loop64:
 
   movq rdx, xmm0
   add rax, rdx
-
-  loop main_loop64
+loop main_loop64
 
   ; do rest - TODO
 
