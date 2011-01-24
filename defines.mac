@@ -1,0 +1,16 @@
+%macro backup_regs 0
+  push ebx
+  push ecx
+  push edx
+  push esi
+  push edi
+%endmacro
+
+%macro restore_regs 0
+  pop edi
+  pop esi
+  pop edx
+  pop ecx
+  pop ebx
+%endmacro
+
