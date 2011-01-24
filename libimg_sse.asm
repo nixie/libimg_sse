@@ -23,15 +23,15 @@
 %include "defines.mac"
 
 [section .text]
-  global fitness
+  global absdiff
 
 
 %ifidn __OUTPUT_FORMAT__, elf32
 ;=============================================================================
-; unsigned int fitness( uint_8 *img1, uint_8 *img2, unsigned int length );
+; unsigned int absdiff( uint_8 *img1, uint_8 *img2, unsigned int length );
 ; >> img1: ebp+8 | img2: ebp+12 | len: ebp+16
 ; =============================================================================
-fitness:
+absdiff:
   push ebp
   mov ebp, esp
   backup_regs
@@ -71,10 +71,10 @@ loop main_loop32
 
 %elifidn __OUTPUT_FORMAT__, elf64
 ;=============================================================================
-; unsigned int fitness( uint_8 *img1, uint_8 *img2, unsigned int length );
+; unsigned int absdiff( uint_8 *img1, uint_8 *img2, unsigned int length );
 ; >> img1: rdi | img2: rsi | len: rdx
 ; =============================================================================
-fitness:
+absdiff:
   mov rcx, rdx   ; move to "ecx" 3. parameter
   and ecx, 0xFFFFFFF0     ; ecx div 16 - ptr
   shr ecx, 4  ; number of bytes -> nuber of blocks (counter)

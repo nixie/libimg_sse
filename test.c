@@ -33,9 +33,9 @@
 
 #define rdtsc() ({ uint64_t x; asm volatile("rdtsc" : "=A" (x)); x; })
 
-unsigned int fitness(unsigned char *img1, unsigned char *img2,
+unsigned int absdiff(unsigned char *img1, unsigned char *img2,
                        unsigned int length);
-unsigned int fitness_C(unsigned char *img1, unsigned char *img2,
+unsigned int absdiff_C(unsigned char *img1, unsigned char *img2,
                        unsigned int length);
 
 int main(int argc, char *argv[])
@@ -50,20 +50,20 @@ int main(int argc, char *argv[])
 
   // ASM (SSE2) version
   start_tsc = rdtsc();
-  result_asm = fitness(img1, img2, LENGTH);
+  result_asm = absdiff(img1, img2, LENGTH);
   end_tsc = rdtsc();
   printf("asm: %d (%qd ticks)\n", result_asm, end_tsc - start_tsc); 
 
   // C version
   start_tsc = rdtsc();
-  result_C = fitness_C(img1, img2, LENGTH);
+  result_C = absdiff_C(img1, img2, LENGTH);
   end_tsc = rdtsc();
   printf("C  : %d (%qd ticks)\n", result_C, end_tsc - start_tsc); 
   
   return EXIT_SUCCESS;
 }
 
-unsigned int fitness_C(unsigned char *img1, unsigned char *img2,
+unsigned int absdiff_C(unsigned char *img1, unsigned char *img2,
     unsigned int length){
   // for each byte compute absolute difference and add it to sum
   unsigned int sum=0;
