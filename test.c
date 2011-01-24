@@ -28,9 +28,9 @@
 #include <inttypes.h>
 #include "libimgdiff.h"
 
-#define TEST_FILE "lena512.bmp"
 #define HEIGHT  512
 #define WIDTH   512
+#define LENGTH  HEIGHT*WIDTH
 
 #define rdtsc() ({ uint64_t x; asm volatile("rdtsc" : "=A" (x)); x; })
 
@@ -41,37 +41,23 @@ unsigned int fitness_C(unsigned char *img1, unsigned char *img2,
 
 int main(int argc, char *argv[])
 { 
-  FILE *fr = fopen(TEST_FILE, "r");
-  if (!fr){
-    printf("cannot open TEST_FILE!\n");
-    return 1;
-  }
-
-  char *img1 = malloc(1*HEIGHT*WIDTH);
-  char *img2 = malloc(1*HEIGHT*WIDTH);
-
-  int nr;
-  nr = fread(img1, 1, HEIGHT*WIDTH, fr);
-  if (nr != (HEIGHT * WIDTH)){
-    printf("cannot read whole TEST_FILE!\n");
-    fclose(fr);
-    return 1;
-  }
-  fclose(fr);
-  
-  //memcpy(img2, img1, HEIGHT*WIDTH);
-  memset(img2, 0x00, WIDTH*HEIGHT);
-    
+  char *img1 = malloc(1*LENGTH);
+  char *img2 = malloc(1*LENGTH);
+  memset(img1, 0x00, LENGTH);
+  memset(img2, 0x01, LENGTH);
+   
   uint64_t start_tsc, end_tsc, diff_asm, diff_C;
   unsigned int result_asm, result_C;
 
+  // ASM (SSE2) version
   start_tsc = rdtsc();
-  result_asm = fitness(img1, img2, 512*512);
+  result_asm = fitness(img1, img2, LENGTH);
   end_tsc = rdtsc();
   printf("asm: %d (%qd ticks)\n", result_asm, end_tsc - start_tsc); 
 
+  // C version
   start_tsc = rdtsc();
-  result_C = fitness_C(img1, img2, 512*512);
+  result_C = fitness_C(img1, img2, LENGTH);
   end_tsc = rdtsc();
   printf("C  : %d (%qd ticks)\n", result_C, end_tsc - start_tsc); 
   
@@ -80,20 +66,14 @@ int main(int argc, char *argv[])
 
 unsigned int fitness_C(unsigned char *img1, unsigned char *img2,
     unsigned int length){
-  // for each byte compute absolute difference
+  // for each byte compute absolute difference and add it to sum
   unsigned int sum=0;
+  unsigned char byte1, byte2;
   while(length-- != 0){
-    unsigned char byte1, byte2, diff;
-    byte1 = *img1;
-    byte2 = *img2;
-    img1++;
-    img2++;
-
-    if (byte1 > byte2){
-      sum += byte1-byte2;
-    }else{
-      sum += byte2-byte1;
-    }
+    byte1 = *(img1++);
+    byte2 = *(img2++);
+    sum += (byte1>byte2)? byte1-byte2 : byte2-byte1;
   }
+
   return sum;
 }
